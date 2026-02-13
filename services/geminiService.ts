@@ -5,7 +5,8 @@ import { GoogleGenAI } from "@google/genai";
 let ai: GoogleGenAI | null = null;
 
 try {
-  const apiKey = process.env.API_KEY || '';
+  // @ts-ignore
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
   if (apiKey) {
     ai = new GoogleGenAI({ apiKey });
   } else {

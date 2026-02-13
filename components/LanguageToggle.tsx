@@ -9,7 +9,7 @@ interface Props {
 
 export const LanguageToggle: React.FC<Props> = ({ lang, setLang }) => {
   return (
-    <div className="flex items-center rounded-full glass overflow-hidden relative" dir="ltr" role="radiogroup" aria-label="Language selector">
+    <div className="flex items-center rounded-full glass overflow-hidden relative flex-shrink-0" dir="ltr" role="radiogroup" aria-label="Language selector">
       {/* Sliding indicator */}
       <div
         className="absolute top-0.5 bottom-0.5 w-1/2 rounded-full transition-all duration-300 ease-out"
@@ -21,7 +21,7 @@ export const LanguageToggle: React.FC<Props> = ({ lang, setLang }) => {
       />
       <button
         onClick={() => setLang('en')}
-        className={`relative z-10 px-3 py-1.5 text-xs font-medium transition-colors duration-200 cursor-pointer rounded-full ${lang === 'en' ? 'text-[#FF9D00]' : 'text-neutral-500 hover:text-neutral-300'
+        className={`relative z-10 px-3 py-1.5 text-xs font-medium transition-colors duration-200 cursor-pointer rounded-full min-w-[60px] text-center ${lang === 'en' ? 'text-[#FF9D00]' : 'text-neutral-500 hover:text-neutral-300'
           }`}
         role="radio"
         aria-checked={lang === 'en'}
@@ -31,7 +31,7 @@ export const LanguageToggle: React.FC<Props> = ({ lang, setLang }) => {
       </button>
       <button
         onClick={() => setLang('ar')}
-        className={`relative z-10 px-3 py-1.5 text-xs font-medium transition-colors duration-200 cursor-pointer rounded-full ${lang === 'ar' ? 'text-[#FF9D00]' : 'text-neutral-500 hover:text-neutral-300'
+        className={`relative z-10 px-3 py-1.5 text-xs font-medium transition-colors duration-200 cursor-pointer rounded-full min-w-[60px] text-center ${lang === 'ar' ? 'text-[#FF9D00]' : 'text-neutral-500 hover:text-neutral-300'
           }`}
         role="radio"
         aria-checked={lang === 'ar'}
