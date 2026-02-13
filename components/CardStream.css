@@ -1,0 +1,175 @@
+.card-stream-section {
+  position: relative;
+  background: #000000;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  color: white;
+}
+
+
+
+.card-stream-section .container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-stream-section .card-stream {
+  position: absolute;
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  /* Ensure it doesn't block clicks to canvas if needed, mostly fine */
+}
+
+.card-stream-section .card-line {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  /* Important for drag */
+  will-change: transform;
+}
+
+.card-stream-section .card-line:active,
+.card-stream-section .card-line.dragging {
+  cursor: grabbing;
+}
+
+.card-stream-section .card-wrapper {
+  position: relative;
+  width: 400px;
+  height: 250px;
+  flex-shrink: 0;
+}
+
+.card-stream-section .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.card-stream-section .card-normal {
+  background: #1a1a1a;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  position: relative;
+}
+
+.card-stream-section .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: all 0.3s ease;
+}
+
+.card-stream-section .card-ascii {
+  background: #000;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-stream-section .ascii-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 255, 255, 0.8);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  line-height: 10px;
+  overflow: hidden;
+  white-space: pre;
+  clip-path: inset(0 calc(100% - var(--clip-left, 0%)) 0 0);
+  background: black;
+}
+
+/* Scanner Beam */
+.card-stream-section .scanner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 350px;
+  border-radius: 30px;
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(0, 255, 255, 0.8),
+      #00FFFF,
+      rgba(0, 255, 255, 0.8),
+      transparent);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.4);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.card-stream-section .scan-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
+  animation: scanEffect 0.6s ease-out;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes scanEffect {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.card-stream-section canvas {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#particleCanvas {
+  z-index: 0;
+}
+
+#scannerCanvas {
+  z-index: 15;
+  left: 0;
+  width: 100vw;
+}
+
+/* Clip paths for scanner effect */
+.card-stream-section .card-normal {
+  clip-path: inset(0 0 0 var(--clip-right, 0%));
+}
+
+.card-stream-section .card-ascii {
+  clip-path: inset(0 calc(100% - var(--clip-left, 0%)) 0 0);
+}

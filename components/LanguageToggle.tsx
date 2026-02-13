@@ -9,20 +9,33 @@ interface Props {
 
 export const LanguageToggle: React.FC<Props> = ({ lang, setLang }) => {
   return (
-    <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-800 p-1 rounded-full">
+    <div className="flex items-center rounded-full glass overflow-hidden relative" dir="ltr" role="radiogroup" aria-label="Language selector">
+      {/* Sliding indicator */}
+      <div
+        className="absolute top-0.5 bottom-0.5 w-1/2 rounded-full transition-all duration-300 ease-out"
+        style={{
+          left: lang === 'en' ? '2px' : 'calc(50% - 2px)',
+          background: 'linear-gradient(135deg, rgba(255, 157, 0, 0.2), rgba(212, 175, 55, 0.15))',
+          border: '1px solid rgba(255, 157, 0, 0.25)',
+        }}
+      />
       <button
         onClick={() => setLang('en')}
-        className={`px-4 py-1.5 rounded-full transition-all text-sm font-medium ${
-          lang === 'en' ? 'bg-[#FF9D00] text-black shadow-lg' : 'text-white hover:bg-neutral-800'
-        }`}
+        className={`relative z-10 px-3 py-1.5 text-xs font-medium transition-colors duration-200 cursor-pointer rounded-full ${lang === 'en' ? 'text-[#FF9D00]' : 'text-neutral-500 hover:text-neutral-300'
+          }`}
+        role="radio"
+        aria-checked={lang === 'en'}
+        aria-label="Switch to English"
       >
         EN
       </button>
       <button
         onClick={() => setLang('ar')}
-        className={`px-4 py-1.5 rounded-full transition-all text-sm font-arabic ${
-          lang === 'ar' ? 'bg-[#FF9D00] text-black shadow-lg' : 'text-white hover:bg-neutral-800'
-        }`}
+        className={`relative z-10 px-3 py-1.5 text-xs font-medium transition-colors duration-200 cursor-pointer rounded-full ${lang === 'ar' ? 'text-[#FF9D00]' : 'text-neutral-500 hover:text-neutral-300'
+          }`}
+        role="radio"
+        aria-checked={lang === 'ar'}
+        aria-label="التبديل إلى العربية"
       >
         عربي
       </button>
